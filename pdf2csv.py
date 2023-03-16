@@ -9,7 +9,7 @@ from tqdm import tqdm
 def pdf_to_table_list(pdf_file) -> list[list]:
     with pdfplumber.open(pdf_file) as pdf:
         tables = []
-        for page in tqdm(pdf.pages, desc="Extracting tables in PDF: "):
+        for page in tqdm(pdf.pages, desc=f"Extracting tables in {pdf_file}", ascii=True):
             tables.extend(page.extract_tables())
             page.flush_cache()  # 清空缓存，否则页面过多会直接拉爆内存。
         return tables
@@ -18,7 +18,7 @@ def pdf_to_table_list(pdf_file) -> list[list]:
 def table_list_to_csv(csv_file, tables: list[list]) -> None:
     with open(csv_file, 'w') as c:
         writer = csv.writer(c)
-        for table in tqdm(tables, desc="Writing into CSV: "):
+        for table in tqdm(tables, desc=f"Writing into {csv_file}", ascii=True):
             writer.writerows(table)
 
 
