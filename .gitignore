@@ -1,4 +1,7 @@
 *.pdf
 *.csv
 *.cmd
-*.build
+*build
+*.exe
+*.dist
+.venv
